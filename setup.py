@@ -14,6 +14,7 @@ setup(
     description='A django app for manage ypur private info.',
     author='Huang Cheng',
     author_email='wsjhhc@tom.com',
+	url="https://github.com/rwxhc/django-pims",
     install_requires=[
         'gmssl >= "3.2.1"',
         'Django >= "3.2"',
