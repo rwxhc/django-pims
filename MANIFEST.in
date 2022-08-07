@@ -1,0 +1,6 @@
+
+
+include LICENSE
+include README.md
+recursive-include private_info/static *
+recursive-include private_info/templates *

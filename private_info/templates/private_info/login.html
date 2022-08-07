@@ -1,0 +1,49 @@
+{% extends "private_info/login_base.html" %}
+{% load static %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
+
+    <div class="container-fluid">
+        <div class="form-signin w-100 m-auto">
+                <h1>登录信息管理</h1>
+                {% if form.errors %}
+                    <p>密码不正确，请重新输入.</p>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <p>该账号没有访问页面权限.</p>
+                    {% else %}
+                        <p>请先登录.</p>
+                    {% endif %}
+                {% endif %}
+
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>{{ form.username.label_tag }}</td>
+                            <td>{{ form.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.password.label_tag }}</td>
+                            <td>{{ form.password }}</td>
+                        </tr>
+                    </table>
+
+                    <input class="btn btn-outline-secondary input-sm" type="submit" value="登录">
+                    <a class="btn btn-outline-secondary input-sm"
+                           href="{% url 'private_info:vn-registry' %}">注册</a>
+                    <input type="hidden" name="next" value="{{ next }}" class="btn btn-outline-secondary">
+                </form>
+        </div>
+    </div>
+{% endblock %}

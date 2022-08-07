@@ -1,0 +1,180 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人信息</title>
+    <link href="{% static 'boot/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .myul li{
+            list-style: none;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            float: left;
+        }
+
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'private_info/css/dashboard.css' %}" rel="stylesheet">
+     <link href="{% static 'private_info/css/sidebars.css' %}" rel="stylesheet">
+     <link href="{% static 'private_info/css/sticky-footer-navbar.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">个人信息保管箱</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="{% url 'private_info:vn-logout' %}">登出({{ request.user }})</a>
+    </div>
+  </div>
+</header>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+
+            <div class="flex-shrink-0 p-3 bg-white" style="width: 246px;">
+                <ul class="list-unstyled ps-0">
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                            设置
+                        </button>
+                        <div class="collapse show" id="home-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="{% url 'private_info:vn-password' password_type='recover' %}"
+                                       class="link-dark d-inline-flex text-decoration-none rounded">超级密码</a></li>
+                                <li><a href="{% url 'private_info:vn-password' password_type='simple' %}" class="link-dark d-inline-flex text-decoration-none rounded">简单密码</a>
+                                <li><a href="{% url 'private_info:vn-password' password_type='normal' %}" class="link-dark d-inline-flex text-decoration-none rounded">普通密码</a>
+                                </li>
+                                <li><a href="{% url 'private_info:vn-password' password_type='private' %}" class="link-dark d-inline-flex text-decoration-none rounded">重要密码</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                            信息管理
+                        </button>
+                        <div class="collapse show" id="dashboard-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="{% url 'private_info:vn-data' 'simple' %}"
+                                       class="link-dark d-inline-flex text-decoration-none rounded">明文信息</a></li>
+                                <li><a href="{% url 'private_info:vn-data' 'normal' %}" class="link-dark d-inline-flex text-decoration-none rounded">普通信息</a>
+                                </li>
+                                <li><a href="{% url 'private_info:vn-data' 'private' %}" class="link-dark d-inline-flex text-decoration-none rounded">重要信息</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="border-top my-3"></li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                            账号
+                        </button>
+                        <div class="collapse" id="account-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a href="{% url 'private_info:vn-login-password-modify' %}"
+                                       class="link-dark d-inline-flex text-decoration-none rounded">修改登录密码</a></li>
+                                <li><a href="{% url 'private_info:vn-logout' %}" class="link-dark d-inline-flex text-decoration-none rounded">登出</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+
+        {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+        {% endif %}
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <h1>{{ ext_info.title }}</h1>
+                    <p>{{ ext_info.desc }}</p>
+                    <hr/>
+                </div>
+            </div>
+            {% block main-content %}{% endblock %}
+        </main>
+    </div>
+</div>
+
+
+<script src="{% static 'boot/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'private_info/js/curd.js' %}"></script>
+
+</body>
+</html>

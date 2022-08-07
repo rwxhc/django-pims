@@ -1,0 +1,28 @@
+{% extends "private_info/login_base.html" %}
+{% load static %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+     {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+     {% endif %}
+
+    <div class="container-fluid">
+        <div class="form-signin w-100 m-auto">
+            <h1>注册一个账号</h1>
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <form action="{% url 'private_info:vn-registry' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="保存" class="btn btn-outline-secondary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

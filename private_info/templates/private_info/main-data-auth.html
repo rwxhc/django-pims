@@ -1,0 +1,14 @@
+{% extends "private_info/main-base.html" %}
+{% load static %}
+{% block main-content %}
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+{#            <form action="{{ ext_info.modify_url }}" method="post">#}
+            <form action="{% url 'private_info:vn-data-auth' ext_info.data_type ext_info.data_id ext_info.action %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="确定" class="btn btn-outline-secondary">
+            </form>
+        </div>
+    </div>
+{% endblock %}
