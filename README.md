@@ -87,7 +87,7 @@ py-venv) d:\py-venv\pims\pims>dir
 
 按下面描述修改文件内容：		   
 
-\# 导入信息管理模块
+# 导入信息管理模块
 import private_info  
 
 INSTALLED_APPS = [
@@ -102,7 +102,7 @@ INSTALLED_APPS = [
 
 
 
-\# 修改时区设置
+# 修改时区设置
 LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
@@ -110,7 +110,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-\# 设置登录后访问页面。
+# 设置登录后访问页面。
 LOGIN_REDIRECT_URL = "/pims/data/simple/"  
 
 ```
@@ -131,9 +131,10 @@ urlpatterns = [
     path('', auth_views.LoginView.as_view(template_name='private_info/login.html'), name='login'),
     path('pims/', include('private_info.urls'))
 ]
-
+```
 
 ### 4. 创建应用模型数据
+```
 cd /d d:\py-venv\pims
 
 生成数据表结构：
