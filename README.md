@@ -26,6 +26,7 @@ setup.py 用于打包本项目。
 
 ## 快速开始
 ### 1. win10 虚拟环境安装
+```
 安装python3.6 或以上版本。
 准备虚拟环境：python -m venv d:\py-venv
 cd /d d:\py-venv\Scripts
@@ -34,8 +35,14 @@ activate
 进入虚拟环境后，提示符如下：
 (py-venv) d:\py-venv\Scripts>
 
+安装方式1，pip直接安装：
+pip install django-pims
+
+安装方式2，下载文件安装：
 拷贝文件：django-pims-1.0.0.tar.gz 到 d:\py-venv
 (py-venv) d:\py-venv>pip install django-pims-1.0.0.tar.gz
+
+```
 
 依赖包会同时下载安装，安装完成后可用 pip list 查看。
 ```
