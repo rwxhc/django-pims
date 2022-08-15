@@ -2,5 +2,6 @@
 
 include LICENSE
 include README.md
+include change.log
 recursive-include private_info/static *
 recursive-include private_info/templates *

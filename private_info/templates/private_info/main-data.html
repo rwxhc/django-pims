@@ -1,13 +1,27 @@
 {% extends "private_info/main-base.html" %}
 {% load static %}
 {% block main-content %}
-    <div style="width: 100%;">
-        <table class="table" style="table-layout: fixed;word-break: break-all;word-wrap: break-word">
+    <div style="width: 100%; height:600px; overflow: auto">
+        <table class="table" style="min-width:1000px;overflow:auto; table-layout: fixed;word-break: break-all;word-wrap: break-word">
+            <colgroup>
+                {% if ext_info.data_type == 'simple' %}
+                    <col style="width:10%;">
+                    <col style="width:25%;">
+                    <col style="width:50%;">
+                    <col style="width:15%;">
+                {% else %}
+                    <col style="width:25%;">
+                    <col style="width:55%;">
+                    <col style="width:20%;">
+                {% endif %}
+            </colgroup>
+
             <div>
                 <div style="float: left">
                     <ul class='myul'>
-{#                        <li><a onclick="getValues()" href="" class="btn btn-outline-secondary input-sm">批量删除</a></li>#}
-                        <li><a href="{% url 'private_info:vn-data-new' data_type=ext_info.data_type %}" class="btn btn-outline-secondary">添加</a></li>
+                        {#                        <li><a onclick="getValues()" href="" class="btn btn-outline-secondary input-sm">批量删除</a></li>#}
+                        <li><a href="{% url 'private_info:vn-data-new' data_type=ext_info.data_type %}"
+                               class="btn btn-outline-secondary">添加</a></li>
                     </ul>
                 </div>
                 <div style="float: right">
@@ -15,10 +29,11 @@
                         <input type="text" name="query_text" value="{{ ext_info.query_text }}">
                         <input type="submit" value="查询" name="submit" class="btn btn-outline-secondary"/>
                     </form>
+
                 </div>
             </div>
             <tr>
-{#                <th width="25"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>#}
+                {#                <th width="25"><input type="checkbox" id="checkAll" onclick="checkAll()"></th>#}
                 <th>信息ID</th>
                 <th>信息摘要</th>
                 {% if ext_info.data_type == 'simple' %}
@@ -28,7 +43,7 @@
             </tr>
             <tr>
                 {% for item in info_list %}
-{#                    <td><input type="checkbox" onclick="checkOne()" value="{{ item.id }}" name="item"></td>#}
+                    {#                    <td><input type="checkbox" onclick="checkOne()" value="{{ item.id }}" name="item"></td>#}
                     <td>{{ item.id }}</td>
                     <td>{{ item.desc }}</td>
                     {% if ext_info.data_type == 'simple' %}
@@ -47,31 +62,35 @@
                 {% endfor %}
         </table>
     </div>
-    <!--底部分页按钮显示-->
-    {#        <div style="position: absolute;top: 30  %;left: 44%">#}
-    {#            <nav aria-label="Page navigation">#}
-    {#                <div class="pagination">#}
-    {#                    <ul class="pagination">#}
-    {#                        {% if page.has_previous %}#}
-    {#                            <li><a href="/curd/{{ page.previous_page_number }}?query={{ query }}" aria-label="Previous">#}
-    {#                                <span aria-hidden="true">&laquo;</span></a></li>#}
-    {#                        {% endif %}#}
-    {##}
-    {#                        {% for num in page.paginator.page_range %}#}
-    {#                            {% if pindex == page.number %}#}
-    {#                                <li><a href="">{{ num }}</a></li>#}
-    {#                            {% else %}#}
-    {#                                <li><a href="/curd/{{ num }}?query={{ query }}">{{ num }}</a></li>#}
-    {#                            {% endif %}#}
-    {#                        {% endfor %}#}
-    {##}
-    {#                        {% if page.has_next %}#}
-    {#                            <li><a href="{% url 'person:curdindex' page.next_page_number %}?query={{ query }}"#}
-    {#                                   aria-label="Next">#}
-    {#                                <span aria-hidden="true">&raquo;</span></a></li>#}
-    {#                        {% endif %}#}
-    {#                    </ul>#}
-    {#                </div>#}
-    {#            </nav>#}
-    {#        </div>#}
+
+    <!--分页部分-->
+    <div class="pagination" style="position: absolute;left: 44%">
+    <span class="step-links">
+        {% if page.has_previous %}
+            {% if ext_info.query_text %}
+                <a href="?query_text={{ ext_info.query_text }}&page=1">&laquo; 第一页</a>
+                <a href="?query_text={{ ext_info.query_text }}&page={{ page.previous_page_number }}">上一页</a>
+            {% else %}
+                <a href="?page=1">&laquo; 第一页</a>
+                <a href="?page={{ page.previous_page_number }}">上一页</a>
+            {% endif %}
+        {% endif %}
+
+        <span class="current">
+            当前页： {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span>
+
+        {% if page.has_next %}
+            {% if ext_info.query_text %}
+                <a href="?query_text={{ ext_info.query_text }}&page={{ page.next_page_number }}">下一页</a>
+                <a href="?query_text={{ ext_info.query_text }}&page={{ page.paginator.num_pages }}">最后页 &raquo;</a>
+            {% else %}
+                <a href="?page={{ page.next_page_number }}">下一页</a>
+                <a href="?page={{ page.paginator.num_pages }}">最后页 &raquo;</a>
+            {% endif %}
+
+        {% endif %}
+    </span>
+    </div>
+
 {% endblock %}

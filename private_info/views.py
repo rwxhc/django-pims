@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 # 表单快捷函数
 from .forms import fsf_get_new_password_form
@@ -565,9 +566,16 @@ def vf_data(request, data_type):
         query_text = request.GET.get('query_text', '').strip()
         if query_text:
             info_list = [ x for x in info_list if query_text in x.desc ]
+
+        page_num = request.GET.get('page', '1').strip()
+        paginator = Paginator(info_list, 5)
+        v_page = paginator.page(page_num)
+        v_pindex = page_num
+        v_info_list = v_page.object_list
+
         ext_info = ext_data_info[data_type]['list']
         ext_info['query_text'] = query_text
-        context = {"info_list": info_list, "ext_info": ext_info}
+        context = {"info_list": v_info_list, "ext_info": ext_info, "pindex": v_pindex, "page": v_page}
         return render(request, 'private_info/main-data.html', context=context)
     else:
         return Http404("不支持的方法")

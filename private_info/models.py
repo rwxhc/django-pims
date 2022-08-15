@@ -218,7 +218,7 @@ def msf_get_data_model_list(data_type:str, user:User):
     cls_info = __get_data_model_class(data_type)
     if not cls_info:
         return None
-    return cls_info.objects.filter(user=user)
+    return cls_info.objects.filter(user=user).order_by('id')
 
 
 # 获取信息数据

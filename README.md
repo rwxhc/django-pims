@@ -19,7 +19,7 @@
 
 ## 目录说明
 ```
-dist 打包文件输出目录：django-pims-1.0.0.tar.gz 
+dist 打包文件输出目录：django-pims-1.0.1.tar.gz 
 private_info: 代码文件目录，对应django中的app。
 setup.py 用于打包本项目。
 ```
@@ -34,8 +34,8 @@ activate
 进入虚拟环境后，提示符如下：
 (py-venv) d:\py-venv\Scripts>
 
-拷贝文件：django-pims-1.0.0.tar.gz 到 d:\py-venv
-(py-venv) d:\py-venv>pip install django-pims-1.0.0.tar.gz
+拷贝文件：django-pims-1.0.1.tar.gz 到 d:\py-venv
+(py-venv) d:\py-venv>pip install django-pims-1.0.1.tar.gz
 
 依赖包会同时下载安装，安装完成后可用 pip list 查看。
 ```
@@ -44,7 +44,7 @@ Package        Version
 -------------- -------
 asgiref        3.5.2
 Django         4.1
-django-pims    1.0.0
+django-pims    1.0.1
 gmssl          3.2.1
 pip            22.0.4
 python-version 0.0.2
