@@ -1,6 +1,9 @@
 # django-pims
 个人私密信息管理系统
 
+
+https://pypi.org/project/django-pims/
+
 ## 说明
 程序基于django 3.2 开发，用于管理个人一些私密信息。
 
