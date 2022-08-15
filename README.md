@@ -37,8 +37,8 @@ activate
 进入虚拟环境后，提示符如下：
 (py-venv) d:\py-venv\Scripts>
 
-拷贝文件：django-pims-1.0.1.tar.gz 到 d:\py-venv
-(py-venv) d:\py-venv>pip install django-pims-1.0.1.tar.gz
+通过 pip 直接从网上安装：
+(py-venv) d:\py-venv>pip install django-pims
 
 依赖包会同时下载安装，安装完成后可用 pip list 查看。
 ```
